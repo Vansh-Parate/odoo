@@ -10,6 +10,8 @@ import Operations from './pages/Operations';
 import MoveHistory from './pages/MoveHistory';
 import Settings from './pages/Settings';
 import Receipts from './pages/Receipts';
+import ReceiptsList from './pages/ReceiptsList';
+import ReceiptDetail from './pages/ReceiptDetail';
 import Deliveries from './pages/Deliveries';
 import Toast from './components/ui/Toast';
 
@@ -97,7 +99,17 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Layout>
-                <Receipts />
+                <ReceiptsList />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/receipts/:id"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <ReceiptDetail />
               </Layout>
             </ProtectedRoute>
           }
