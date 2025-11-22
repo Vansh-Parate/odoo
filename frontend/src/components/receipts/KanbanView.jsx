@@ -48,7 +48,6 @@ export default function KanbanView({ receipts }) {
                 {columnReceipts.length} {columnReceipts.length === 1 ? 'receipt' : 'receipts'}
               </span>
             </div>
-<<<<<<< HEAD
             <div className="flex-1 space-y-3 overflow-y-auto max-h-[calc(100vh-300px)] kanban-scroll custom-scrollbar">
               {columnReceipts.length === 0 ? (
                 <div className="text-center py-8 text-sm text-slate-500">
