@@ -2,6 +2,8 @@
 
 A full-stack application built with React, Tailwind CSS, Express, and PostgreSQL, following mobile-first design principles with distinctive aesthetics.
 
+# Demo Video Link - [https://drive.google.com/file/d/1wrBP0zwAcQ5crNLIgOBtU8Vkv1WeIlQV/view?usp=drive_link](https://drive.google.com/file/d/1lcUh5sjLJO2mAwcIJ_QmZZpmtxPlatkK/view?usp=sharing)
+
 ## Tech Stack
 
 - **Frontend**: React 19 + Vite + Tailwind CSS
