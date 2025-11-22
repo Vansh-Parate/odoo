@@ -3,6 +3,7 @@ import { AppProvider, useApp } from './context/AppContext';
 import Layout from './components/layout/Layout';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Stock from './pages/Stock';
@@ -12,6 +13,8 @@ import Settings from './pages/Settings';
 import Warehouse from './pages/Warehouse';
 import Location from './pages/Location';
 import Receipts from './pages/Receipts';
+import ReceiptsList from './pages/ReceiptsList';
+import ReceiptDetail from './pages/ReceiptDetail';
 import Deliveries from './pages/Deliveries';
 import Toast from './components/ui/Toast';
 
@@ -39,6 +42,14 @@ function AppRoutes() {
           element={
             <PublicRoute>
               <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
             </PublicRoute>
           }
         />
@@ -115,7 +126,17 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Layout>
-                <Receipts />
+                <ReceiptsList />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/receipts/:id"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <ReceiptDetail />
               </Layout>
             </ProtectedRoute>
           }

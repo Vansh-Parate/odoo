@@ -41,7 +41,20 @@ export function AppProvider({ children }) {
     return stored.length > 0 ? stored : MOCK_WAREHOUSES;
   });
   const [locations, setLocations] = useState(() => loadFromStorage('stockmaster_locations', []));
-  const [user, setUser] = useState(() => loadFromStorage(STORAGE_KEYS.USER, null));
+  
+  // Load user from localStorage (from auth token)
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        return JSON.parse(storedUser);
+      } catch {
+        return null;
+      }
+    }
+    return loadFromStorage(STORAGE_KEYS.USER, null);
+  });
+  
   const [toast, setToast] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -72,7 +85,12 @@ export function AppProvider({ children }) {
 
   // Sync user to localStorage
   useEffect(() => {
-    saveToStorage(STORAGE_KEYS.USER, user);
+    if (user) {
+      saveToStorage(STORAGE_KEYS.USER, user);
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
   }, [user]);
 
   // Sync warehouses and locations to localStorage
@@ -290,15 +308,24 @@ export function AppProvider({ children }) {
   };
 
   // Auth operations
-  const login = (email, password) => {
-    // Mock authentication - TODO: implement real auth
-    const mockUser = { email, name: 'Admin User' };
+  const login = (userData) => {
+    // userData can be a user object from API or email/password for backward compatibility
+    if (userData && typeof userData === 'object' && userData.email) {
+      // Real authentication - user object from API
+      setUser(userData);
+      showToast('Login successful', 'success');
+      return true;
+    }
+    // Fallback for backward compatibility (shouldn't be used with new auth)
+    const mockUser = { email: userData, name: 'Admin User' };
     setUser(mockUser);
     showToast('Login successful', 'success');
     return true;
   };
 
   const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setUser(null);
     showToast('Logged out successfully', 'success');
   };

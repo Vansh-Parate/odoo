@@ -1,5 +1,7 @@
 import express from 'express';
 import { pool } from '../db/index.js';
+import authRoutes from './auth.js';
+import dbCheckRoutes from './db-check.js';
 
 const router = express.Router();
 
@@ -28,6 +30,12 @@ router.get('/data', async (req, res) => {
     });
   }
 });
+
+// Auth routes
+router.use('/auth', authRoutes);
+
+// Database check routes
+router.use('/', dbCheckRoutes);
 
 // ============================================
 // PRODUCTS API

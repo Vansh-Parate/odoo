@@ -329,7 +329,7 @@ export default function Deliveries() {
                     {formData.items.map((item, index) => {
                       const product = products.find((p) => p.id === item.productId);
                       return (
-                        <tr key={index}>
+                        <tr key={`item-${item.productId}-${index}`}>
                           <td className="py-2 px-3 text-slate-200">{product?.name || 'Unknown'}</td>
                           <td className="py-2 px-3 text-slate-300">{item.quantity}</td>
                           <td className="py-2 px-3 text-slate-300">{product?.uom || ''}</td>
